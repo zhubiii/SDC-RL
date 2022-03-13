@@ -1,3 +1,4 @@
+from lib2to3.pgen2.token import STAR
 from math import pi
 '''
 Here we define constant values as to make main.py cleaner
@@ -14,10 +15,10 @@ CAR_HEIGHT:     Height of Car in 2D
 
 FRICTION:       Friction term to simulate friction
 
-Various RGB colors and their values in 3-tuples
+Various RGB colors and their values in 3-tuples or 4-tuples if RGBA
 '''
 WIDTH, HEIGHT   = 900, 500
-STARTX, STARTY  = WIDTH/2, HEIGHT/2
+STARTX, STARTY  = WIDTH/2, HEIGHT-50
 ANGLE           = 0.
 FPS             = 60
 VEL             = 0.
@@ -30,10 +31,14 @@ CAR_HEIGHT      = 30
 FRICTION        = 0.01
 
 WHITE           = (255, 255, 255)
+BLACK           = (0, 0, 0)
+
+WHITEALPHA      = (255, 255, 255, 255)
 
 '''
 Car class to access and store all variables related to the car
 ------------
+x,y:    True x,y pose of car
 ang:    Angle of the car in radians
 vel:    Float indicating velocity
 acc:    Float indicating acceleration
@@ -44,9 +49,19 @@ height: Height of car in 2D
 '''
 class Car(object):
     def __init__(self):
+        self.x          = STARTX
+        self.y          = STARTY
         self.ang        = ANGLE
         self.vel        = VEL
         self.acc        = ACC
         self.w          = W
         self.width      = CAR_WIDTH
         self.height     = CAR_HEIGHT
+    
+    def reset(self):
+        self.x          = STARTX
+        self.y          = STARTY
+        self.ang        = ANGLE
+        self.vel        = VEL
+        self.acc        = ACC
+        self.w          = W
