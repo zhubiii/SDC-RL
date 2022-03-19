@@ -288,6 +288,7 @@ WALLS:  List of all our line segment walls
 Return:
 -------
 List of laserscan measurements
+(x,y) position of the impact of laser to obstacle
 '''
 def get_laserscan(WALLS):
     num     = Car.num_laserscan
@@ -295,7 +296,8 @@ def get_laserscan(WALLS):
     # Use line intersection formula
     x1 = Car.x
     y1 = Car.y
-    laserscan = []
+    laserscan   = []
+    impactxy    = []
     for i in range(0, num):
         # All variables for Line intersection
         x2 = Car.x+(Car.laserscan_dist*cos(angle))
@@ -314,6 +316,7 @@ def get_laserscan(WALLS):
                 if 0<=t and t<=1 and 0<=u and u<=1: # Test to see if intersection exists
                     Px = x1+(t*(x2-x1))
                     Py = y1+(t*(y2-y1))
+                    impactxy.append((Px, Py))
                     # Calculate distance between laserscan origin and intersection
                     dist = sqrt((Px-Car.x)**2 + (Py-Car.y)**2)
                     laserscan.append(dist)
@@ -324,12 +327,12 @@ def get_laserscan(WALLS):
         if not intersect:
             laserscan.append(-1)
 
-    return laserscan
+    return laserscan, impactxy
 
 '''
 Function to draw the laserscan in draw_window
 '''
-def draw_laserscan(laserscan):
+def draw_laserscan(laserscan, impactxy):
     num     = Car.num_laserscan
     angle   = Car.ang
     for i in range(0, num):
@@ -346,6 +349,9 @@ def draw_laserscan(laserscan):
                             (Car.x+(laserscan[i]*cos(angle)), Car.y+(laserscan[i]*sin(angle))),
                             1)
         angle += ((2*pi) / num)
+    # draw small circle at impact point of laser and obstacle
+    for x,y in impactxy:
+        pygame.draw.circle(WIN, config.RED, (x,y), 3, 3)
 '''
 Function to reset the game
 
@@ -370,7 +376,7 @@ Returns:
 --------
 Nothing
 '''
-def draw_window(game_car, image, keys_pressed, action, laserscan):
+def draw_window(game_car, image, keys_pressed, action, laserscan, impactxy):
     # Draw background
     WIN.blit(MAP_IMAGE, (0,0))
     # Draw reward text
@@ -385,7 +391,7 @@ def draw_window(game_car, image, keys_pressed, action, laserscan):
     # Draw Car hitbox
     pygame.draw.rect(WIN, config.SOFT_RED, game_car)
     # Draw the laserscan
-    draw_laserscan(laserscan)
+    draw_laserscan(laserscan, impactxy)
     # Draw car
     WIN.blit(image, image.get_rect(center=(Car.x, Car.y)))
 
@@ -437,9 +443,9 @@ def main():
         game_car.centery = Car.y
 
         detect_wall_collision(game_car, WALLS)
-        laserscan = get_laserscan(WALLS)
+        laserscan, impactxy = get_laserscan(WALLS)
 
-        draw_window(game_car, image, keys_pressed, action, laserscan)
+        draw_window(game_car, image, keys_pressed, action, laserscan, impactxy)
 
     pygame.quit()
 
