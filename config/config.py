@@ -57,6 +57,7 @@ RED             = (255, 0, 0)
 SOFT_RED        = (238, 78, 78)
 MAGENTA         = (235, 105, 243)
 ORANGE          = (255, 160, 47)
+TAN             = (247, 213, 173)
 
 
 WHITEALPHA      = (255, 255, 255, 255)
@@ -73,6 +74,7 @@ wdot:   Angular Acceleration in rad/s
 width:  Width of car in 2D
 height: Height of car in 2D
 reward: Reward for Q-Learning
+expired_waypoint:  Keep track of last waypoint so cannot receive reward for same one
 num_laserscan:  number of lasers
 laserscan_dist: Max distance of simulation laser scan
 '''
@@ -89,6 +91,7 @@ class Car(object):
         self.reward         = 0.
         self.action_space   = spaces.Discrete(10,)
         #self.observation    = array([self.x, self.y, self.vel, self.ang])
+        self.expired_waypoints  = []
         self.num_laserscan  = 12
         self.laserscan_dist = 100
     
@@ -115,3 +118,4 @@ class Car(object):
         self.acc        = ACC
         self.w          = W
         self.reward     = 0.
+        self.expired_waypoints = []
