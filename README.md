@@ -12,8 +12,8 @@ Agent must:
 
 ## Creating Maps
 - make sure it is 900x500 in dimension
-- anything black will be indentified as a collision
-    - I use a line detection algorithm from OpenCV so try to draw the borders using straight line tool
+- anything black RGB(0,0,0) will be indentified as a collision
+- blue circle RGB(0,0,255) will be identified as a waypoint
 
 ## Dependencies
 - Python3.8
