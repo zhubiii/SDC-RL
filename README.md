@@ -14,7 +14,8 @@ Used Deep-Q network model to train our agent. See [Creating Maps](#creating-maps
 - Trained models are saved in to the `models` folder
 - `config.py` holds many of the parameters
 ### Car Parameters
-- We can tune the linear acceleration, angular velocity, max speed, friction force on the car, and more
+- We can tune the number of laser scanners and their max range
+- We can also tune the linear acceleration, angular velocity, max speed, friction force on the car, and more
 - Found in `config.py`
 ## Scenarios
 Agent must:
