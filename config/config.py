@@ -1,5 +1,4 @@
 from math import pi
-from gym import Env, spaces
 '''
 Define parameters for Deep Q-learning
 -----------
@@ -89,27 +88,10 @@ class Car(object):
         self.width          = CAR_WIDTH
         self.height         = CAR_HEIGHT
         self.reward         = 0.
-        self.action_space   = spaces.Discrete(10,)
-        #self.observation    = array([self.x, self.y, self.vel, self.ang])
         self.expired_waypoints  = []
         self.num_laserscan  = 12
         self.laserscan_dist = 100
     
-    '''
-    For Q learning
-    '''
-    def get_action_meanings(self):
-        return {0: "Left",
-                1: "Right",
-                2: "Forward",
-                3: "Backward",
-                4: "Forward Left",
-                5: "Forward Right",
-                6: "Backward Left",
-                7: "Backward Right",
-                8: "Nothing"}
-    
-
     def reset(self):
         self.x          = STARTX
         self.y          = STARTY
