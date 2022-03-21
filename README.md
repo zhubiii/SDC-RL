@@ -36,6 +36,9 @@ Agent must:
 - Need more fine tuning of hyperparameters and need to train the model for longer
 - The current way of setting waypoints does not specify direction
 - Perhaps define the DQN paramters in config.py
+- Allow dynamic spawn points within the track
+- Fine tune the model's layers
+- Have the waypoints part of the agent's observation
 
 ## Dependencies
 - Python3.8
