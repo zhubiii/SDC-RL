@@ -1,15 +1,16 @@
 # SDC-RL
 Testing Reinforcement Learning for Self-Driving Cars in Urban Environments using Pygame
 
-Used Deep-Q network model to train our agent. See [Creating Maps](#creating-maps) to learn how to make custom maps. 
+Using RL to estimate the distribution of adverse agents in complex driving scenarios
 
 ## Usage
+Used Deep-Q network model to train our agent. See [Creating Maps](#creating-maps) to learn how to make custom maps. 
 - Download the file to a jupyter notebook environment. The VScode extension worked well for me
 - On launch a window showing the detected lines as well as a window for detected waypoints will show up
 - WASD to navigate up, left, down, and right respectively if running main.ipynb
 ### Files
-- `main.ipynb` is primarily for human teleoperation and fun
-- `sdcDQL.ipynb` is to run the Deep-Q RL model
+- `reference/main.ipynb` is primarily for human teleoperation and fun
+- `reference/sdcDQL.ipynb` is to run the Deep-Q RL model
     - The code should be well documented
 - Trained models are saved in to the `models` folder
 - `config.py` holds many of the parameters
@@ -17,14 +18,9 @@ Used Deep-Q network model to train our agent. See [Creating Maps](#creating-maps
 - We can tune the number of laser scanners and their max range
 - We can also tune the linear acceleration, angular velocity, max speed, friction force on the car, and more
 - Found in `config.py`
-## Scenarios
+## Experimental Scenarios
 Agent must:
-- Avoid collision with walls/stay on the road
-- Stay on the right side of the road
-- Stop at traffic lights or stop signs
-- Slow down at yield signs
-- Avoid collision with other random acting agent cars
-- Avoid collision with random pedestrians
+- Merge onto highway
 
 ## Creating Maps
 - Make sure it is 900x500 in dimension
@@ -32,13 +28,17 @@ Agent must:
 - Blue circle RGB(0,0,255) will be identified as a waypoint and used as a reward
 - Put into the assets folder as a .png file. Then go to the desired .ipynb file to load it in. Will be assigned to the `MAP_IMAGE` variable
 
-## Issues
-- Need more fine tuning of hyperparameters and need to train the model for longer
-- The current way of setting waypoints does not specify direction
-- Perhaps define the DQN paramters in config.py
-- Allow dynamic spawn points within the track
-- Fine tune the model's layers
-- Have the waypoints part of the agent's observation
+## TODO
+### Car side
+⬜️ Implement global path planning  
+⬜️ Implement local path planner  
+⬜️ Implement ackermann model  
+⬜️ Implement control  
+### Game side
+⬜️ Implement user chosen spawn point  
+⬜️ Implement scrolling, infinitely large map  
+⬜️ Implement merge onto highway scenario  
+⬜️ Implement multiple cars with varying behavior  
 
 ## Dependencies
 - Python3.8
