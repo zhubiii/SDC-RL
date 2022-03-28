@@ -10,7 +10,7 @@ Used Deep-Q network model to train our agent. See [Creating Maps](#creating-maps
 - WASD to navigate up, left, down, and right respectively if running main.ipynb
 ### Files
 - `reference/main.ipynb` is primarily for human teleoperation and fun
-- `reference/sdcDQL.ipynb` is to run the Deep-Q RL model
+- `reference/sdcDQL_OLD.ipynb` is to run the Deep-Q RL model with keras-rl (other uses plain keras)
     - The code should be well documented
 - Trained models are saved in to the `models` folder
 - `config.py` holds many of the parameters
